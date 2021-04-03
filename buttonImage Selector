@@ -1,0 +1,126 @@
+Creating the project
+<img src="https://4.bp.blogspot.com/-uNUqAd6Z9i8/WqaOkzZg7zI/AAAAAAAAATo/KsBgw0AeCNAkcnmx4GmX-75x4XlZXP96ACLcBGAs/s1600/Start%2Ba%2Bnew%2BAndroid%2BStudio%2Bproject.jpg">
+Open the Android Studio, then click “Start a new Android Studio project”.
+
+Start a new Android Studio project
+
+Enter the  info below:
+Application Name: ImageButtonExample
+Company domain: jackrutorial.com
+Project location: C:/android
+then click "Next".
+
+create new project
+
+Select the form factors and minimum SDK. In this tutorial, We selected the minimum SDK "API 15: Android 4.0.3(IceCreamSandwich)", click "Next".
+
+Select the form factors and minimum SDK
+
+Select the Empty activity and click "Next".
+
+select the Activity
+
+Leave the activity name “MainActivity”, Click Finish.
+
+enter the activity name
+
+Adding photos in the project folder
+Go to your image (focused.jpg,normal.jpg,pressed.jpg) in windows, then press Ctrl + C or right click and copy
+Go to res/drawable folder and press Ctrl + V or right click it and paste.
+
+Add button.xml resource file
+Click the target app module in the Project window and then select File > New > Android resource file.
+Add an XML resource file
+
+Fill in the details in the dialog
+File name: button.xml
+Resource type: Drawable
+Click Ok
+
+new resource file
+
+Change button.xml code to the following.
+
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/pressed" android:state_pressed="true" />
+    <item android:drawable="@drawable/focused" android:state_focused="true" />
+    <item android:drawable="@drawable/normal" />
+</selector>
+
+Change the activity_main.xml layout to the following.
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jackrutorial.imagebuttonexample.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ImageButton Selected"
+            />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ImageButton"
+            />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/focused"
+            />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
+Change MainActivity activity code to the following.
+
+package com.jackrutorial.imagebuttonexample;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    ImageButton imageButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "ImageButton is clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+}
